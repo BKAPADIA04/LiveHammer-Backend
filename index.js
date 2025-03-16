@@ -8,7 +8,7 @@ connectToMongo();
 
 // This approach ensures that the server can handle both regular HTTP traffic and other protocols (like WebSocket) on the same port.
 const server = express();
-const port = 8080;
+const port = process.env.PORT;
 
 const httpServer = http.createServer(server); // connecting http server to express server
 const socketServer = require('./VideoConferencing/controller/Video.js');
