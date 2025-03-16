@@ -1,0 +1,143 @@
+const io = require('socket.io')(server);
+const peers = {};  // A map of peer connections
+
+io.on('connection', socket => {
+  socket.on('join', ({ room, stream }) => {
+    // Handle the join event, and assign the stream to the room
+    peers[socket.id] = { socket, stream };
+    socket.join(room);
+
+    // Notify other peers in the room
+    socket.to(room).emit('new-peer', socket.id);
+  });
+
+  socket.on('offer', ({ peerId, offer }) => {
+    // Send the offer to the target peer
+    io.to(peerId).emit('offer', { peerId: socket.id, offer });
+  });
+
+  socket.on('ice-candidate', ({ peerId, candidate }) => {
+    // Send ICE candidate to the peer
+    io.to(peerId).emit('ice-candidate', { peerId: socket.id, candidate });
+  });
+
+  socket.on('disconnect', () => {
+    // Handle cleanup when a peer disconnects
+    delete peers[socket.id];
+  });
+});
+
+
+import React, { useEffect, useRef } from 'react';
+import io from 'socket.io-client';
+
+const VideoConference = () => {
+  const localVideoRef = useRef(null);
+  const remoteVideosRef = useRef([]);
+
+  useEffect(() => {
+    const socket = io('https://your-signaling-server.com');  // Replace with your signaling server URL
+
+    // WebRTC setup
+    const peerConnections = {};
+    const localStream = null;
+
+    // Get local media (video/audio)
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+      .then(stream => {
+        localStream = stream;
+        localVideoRef.current.srcObject = stream;
+
+        // Send the stream to the signaling server
+        socket.emit('join', { room: 'your-room-id', stream: stream });
+
+        // Handle incoming streams from others
+        socket.on('new-peer', (peerId) => {
+          createPeerConnection(peerId, socket);
+        });
+
+        // Handle remote stream
+        socket.on('remote-stream', (peerId, stream) => {
+          // Add the incoming stream to the UI
+          addRemoteStream(peerId, stream);
+        });
+      })
+      .catch(err => console.error("Failed to get local media:", err));
+
+    const createPeerConnection = (peerId, socket) => {
+      const peerConnection = new RTCPeerConnection();
+      peerConnections[peerId] = peerConnection;
+
+      // Add local stream tracks to the peer connection
+      localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+
+      peerConnection.ontrack = (event) => {
+        socket.emit('receive-stream', { peerId, stream: event.streams[0] });
+      };
+
+      peerConnection.onicecandidate = (event) => {
+        if (event.candidate) {
+          socket.emit('ice-candidate', { peerId, candidate: event.candidate });
+        }
+      };
+
+      peerConnection.createOffer()
+        .then(offer => {
+          return peerConnection.setLocalDescription(offer);
+        })
+        .then(() => {
+          socket.emit('offer', { peerId, offer: peerConnection.localDescription });
+        });
+    };
+
+    const addRemoteStream = (peerId, stream) => {
+      remoteVideosRef.current.push(
+        <video key={peerId} srcObject={stream} autoPlay playsInline />
+      );
+    };
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
+  return (
+    <div className="video-layout">
+      <div className="local-video">
+        <video ref={localVideoRef} autoPlay muted playsInline />
+      </div>
+      <div className="remote-videos">
+        {remoteVideosRef.current}
+      </div>
+    </div>
+  );
+};
+
+export default VideoConference;
+
+
+
+
+
+
+const io = require('socket.io')(server);
+
+let currentPrice = 100; // Initial price
+const objectName = 'Antique Vase';
+
+io.on('connection', (socket) => {
+    console.log('A user connected:', socket.id);
+
+    // Emit the current price to the newly connected client
+    socket.emit('auction:priceUpdate', { price: currentPrice, objectName });
+
+    // Example: Simulate price updates
+    setInterval(() => {
+        currentPrice += 10; // Increment the price
+        io.emit('auction:priceUpdate', { price: currentPrice, objectName });
+    }, 5000);
+
+    socket.on('disconnect', () => {
+        console.log('A user disconnected:', socket.id);
+    });
+});

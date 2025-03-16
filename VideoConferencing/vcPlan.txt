@@ -1,0 +1,44 @@
+-> Frontend integration with webrtc and socket io
+-> Explore various features (screen sharing,etc)
+-> Chatapp
+
+
+->RTC Peer Connection
+->RTC ICE Candidate
+
+->Face Detection API
+
+
+1) ICE Server Connection to get public IP Address
+2) Signalling Server to connect two computers
+3) Mesh
+4) SFU
+
+-> io = io is the main Socket.IO server instance. It represents the server-side socket and is used to manage communication at a global level, such as:
+Broadcasting events to all clients or clients in a specific room.
+Listening for client connections.
+Managing rooms and namespaces.
+
+-> socket = socket represents the individual connection between the server and a specific client. Each client gets its own socket instance when it connects to the server.
+
+
+
+-> Agora API
+1) Setup
+2) env
+3) UI (Call,Cancel,Volume,ScreenShare)
+4) Chat
+
+Chat 
+-> Why multiple users
+-> Setup proper Chat
+-> P2All and P2P
+-> Cancel option chat
+-> UI for chat
+
+
+-> Chat Storage
+
+Firstly, implement persons in the room.
+Next find out how to store different chats
+Thirdly, print proper names in the chat instead of ids

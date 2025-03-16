@@ -1,0 +1,18 @@
+User Schema
+
+-> Name
+-> Email 
+-> Phone
+-> Total Purse Remaining
+-> Total Purse Spent
+-> Items Bought (Combine ref with Items Schema)
+-> Address
+-> Profile Picture (Decided for frontend)
+-> Wishlist (Combine ref with Items Schema)
+
+
+Make another Schema for admin
+
+// first api - search the uniqueness of email and phone (in User)
+// second and third api - create and verify OTP (in Authentication)
+// fourth api - create User(in User)

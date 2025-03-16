@@ -1,0 +1,52 @@
+-> Frontend
+1) Three Stick like hammer buttons
+2) Bid Successful ke baad Hammer 3 times
+3) Announce The Result 
+
+-> React Redux
+
+Make Buttons
+Redux will keep check of the price
+Communication of the price to the backend using socketio
+Design Buttons
+
+
+Features:
+-> Predefined Increment in Bids
+-> Countdown timer (30 seconds after each bid)
+-> Show Current Highest Bid
+
+-> Bid Confirmation Dialog : Prompt users to confirm before placing a bid to avoid accidental bids.
+-> Max Auto-Bid (Proxy Bidding) : Let users set a maximum bid amount, and the system automatically bids on their behalf until their max is reached.
+-> Bid Retraction Option : Allow users to withdraw a bid within a short time frame (e.g., 10 seconds) to correct accidental bids, with conditions to prevent abuse.
+
+-> User Points Table
+-> Auction Analysis with graphs for each user
+-> Voice-Activated Bidding : Introduce voice commands like “Bid $500” for hands-free participation, especially useful for multitasking users.
+
+
+-> Invoice and Receipt Generation: Generate and email a receipt/invoice for each completed transaction.
+
+User Experience Enhancements
+Live Bid Strategy Suggestions
+
+-> Provide real-time suggestions, such as optimal bid amounts or timing based on current activity and user behavior.
+
+-> AI and Machine Learning Features
+Smart Bidding Alerts
+AI analyzes user bidding patterns and alerts them if an item aligns with their previous interests or bidding behavior.
+Bid Success Probability Indicator
+Show the likelihood of winning based on the current bid amount and historical trends for similar auctions.
+
+-> Co-Bidding (Team Auctions)
+Allow users to form bidding teams, pool resources, and bid collaboratively on high-value items.
+
+-> Shared Notes and Analytics
+Provide tools for teams to take notes, analyze bidding trends, and strategize together during or before auctions.
+
+
+-> Ensuree that the new client has the updated price value
+-> Different Price Tags
+-> Display Current Bid
+-> Timer to finalize the bids
+-> 

@@ -1,0 +1,36 @@
+{
+  "name": "auction",
+  "version": "1.0.0",
+  "description": "LiveHammer",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bhavya Kapadia",
+  "license": "ISC",
+  "dependencies": {
+    "@stripe/stripe-js": "^6.0.0",
+    "agora-access-token": "^2.0.4",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-validator": "^7.2.0",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "mkcert": "^3.2.0",
+    "mongoose": "^8.9.0",
+    "nodemailer": "^6.9.16",
+    "nodemon": "^3.1.9",
+    "path": "^0.12.7",
+    "razorpay": "^2.9.5",
+    "smtp": "^0.1.4",
+    "socket-io": "^1.0.0",
+    "socket.io": "^4.8.1",
+    "stripe": "^17.6.0"
+  }
+}
