@@ -46,8 +46,10 @@ exports.checkoutSession = async(req,res) => {
       },
     ],
     mode: 'payment',
-    success_url: 'http://localhost:3000/user/payment/success',
-    cancel_url: 'http://localhost:3000/user/payment/cancel',
+    success_url:`${process.env.REACT_URL}/user/payment/success`,
+    cancel_url:`${process.env.REACT_URL}/user/payment/cancel`,
+    // success_url: 'http://localhost:3000/user/payment/success',
+    // cancel_url: 'http://localhost:3000/user/payment/cancel',
   });
 
   return res.status(200).json({ success:success, id: session.id });
