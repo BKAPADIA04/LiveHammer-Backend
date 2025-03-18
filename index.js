@@ -17,8 +17,8 @@ socketServer(httpServer); // Pass the server instance to the Socket.IO module
 server.get('/', (req, res) => {
   res.send('Welcome to LiveHammer!')
 })
-server.use(cors()); // cross browser
-server.use(cors({ origin:process.env.REACT_URL })); // cross browser
+// server.use(cors()); // cross browser
+server.use(cors({ origin:process.env.REACT_URL , credentials:true})); // cross browser
 server.use(express.json()); // reading json
 
 //Router Section
