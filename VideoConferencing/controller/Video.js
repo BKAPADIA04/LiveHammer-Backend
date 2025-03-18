@@ -14,7 +14,8 @@ module.exports = (server) => {
       origin: `${process.env.REACT_URL}`,
       methods: ["GET", "POST"],
       credentials:true,
-      transports: ["polling"]
+      transports: ["polling"],
+      allowEIO3: true
     }
   });
 

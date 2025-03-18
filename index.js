@@ -18,7 +18,7 @@ server.get('/', (req, res) => {
   res.send('Welcome to LiveHammer!')
 })
 // server.use(cors()); // cross browser
-server.use(cors({ origin:process.env.REACT_URL , methods: ["GET", "POST"], credentials:true, transports: [ "polling"] })); // cross browser
+server.use(cors({ origin:process.env.REACT_URL , methods: ["GET", "POST"], credentials:true })); // cross browser
 server.use(express.json()); // reading json
 
 //Router Section
