@@ -12,7 +12,9 @@ module.exports = (server) => {
     cors:{
       // origin: "http://localhost:3000",
       origin: `${process.env.REACT_URL}`,
-      methods: ["GET", "POST"]
+      methods: ["GET", "POST"],
+      credentials:true,
+      transports: ["polling"]
     }
   });
 
